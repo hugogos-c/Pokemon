@@ -26,14 +26,14 @@
             <h2>Pokémon attaquant</h2>
             <br>
             <div class="form-group form-floating">
-              <input type="number" name="att" placeholder="Attaque" id="att" class="form-control border border-secondary" style="width: 12em;" required>
+              <input type="number" name="att" placeholder="Attaque" id="att" class="form-control border border-secondary" style="width: 12em;" min="1" max="500" required>
               <label for="att">Attaque :</label>
               <div class="invalid-feedback">Ce champ n'est pas rempli</div>
             </div>
             <br>
             <br>
             <div class="form-group form-floating">
-              <input type="number" name="pui" placeholder="Puissance" id="pui" class="form-control border border-secondary" style="width: 12em;" required>
+              <input type="number" name="pui" placeholder="Puissance" id="pui" class="form-control border border-secondary" style="width: 12em;" min="10" max="250" step="5" required>
               <label for="pui">Puissance :</label>
               <div class="invalid-feedback">Ce champ n'est pas rempli</div>
             </div>
@@ -74,7 +74,7 @@
             <h2>Pokémon défensif</h2>
             <br>
             <div class="form-group form-floating">
-              <input type="number" name="def" placeholder="Défense" id="def" class="form-control border border-secondary" style="width: 12em;" required>
+              <input type="number" name="def" placeholder="Défense" id="def" class="form-control border border-secondary" style="width: 12em;" min="1" max="500" required>
               <label for="def">Défense :</label>
               <div class="invalid-feedback">Ce champ n'est pas rempli</div>
             </div>
@@ -138,6 +138,7 @@
         </div>
       </div>
     </form>
+    <br>
     <div class="container">
       <div class="row">
         <div class="col">
@@ -149,11 +150,8 @@
           }
           if (isset($_POST['bst_def']) && isset($_POST['def']) && isset($_POST['pui']) && isset($_POST['bst_att']) && isset($_POST['att']))
           {
-            $PV_perdus1 = (((50 * 0.4 + 2) * ($_POST['att'] * $_POST['bst_att'] * $bru) * $_POST['pui']) / (($_POST['def'] * $_POST['bst_def']) * 50) + 2) * $_POST['stab'] * $_POST['eff'] * $_POST['meteo'] * 0.85;
-            $PV_perdus2 = (((50 * 0.4 + 2) * ($_POST['att'] * $_POST['bst_att'] * $bru) * $_POST['pui']) / (($_POST['def'] * $_POST['bst_def']) * 50) + 2) * $_POST['stab'] * $_POST['eff'] * $_POST['meteo'];
-            $PV_perdus_1 = floor($PV_perdus1);
-            $PV_perdus_2 = floor($PV_perdus2);
-            echo '<br>';
+            $PV_perdus_1 = floor((((50 * 0.4 + 2) * ($_POST['att'] * $_POST['bst_att'] * $bru) * $_POST['pui']) / (($_POST['def'] * $_POST['bst_def']) * 50) + 2) * $_POST['stab'] * $_POST['eff'] * $_POST['meteo'] * 0.85);
+            $PV_perdus_2 = floor((((50 * 0.4 + 2) * ($_POST['att'] * $_POST['bst_att'] * $bru) * $_POST['pui']) / (($_POST['def'] * $_POST['bst_def']) * 50) + 2) * $_POST['stab'] * $_POST['eff'] * $_POST['meteo']);
             echo '<p>Le pokémon perdra entre <strong>'.$PV_perdus_1.'</strong> PV et <strong>'.$PV_perdus_2.'</strong> PV</p>';
           }
           ?>
